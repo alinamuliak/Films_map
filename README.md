@@ -18,22 +18,22 @@ With this map, the user has the opportunity to learn about interesting places th
 
 ## example of startup (year and location) of input and screenshot of generated map:
 This is an example of working proccess and result of programm with 2018 year and (40.730610, -73.935242) user location:
-<img src="start_program.jpg" alt="output_screenshot"/>
+<img src="screenshots/mstart_program.jpg" alt="output_screenshot"/>
 
 This is a map from generated html-file opened in browser:
 
 Markers that are close to each others are grouped into the clusters. Also, you can see the lines connected to New York (user input location).
-<img src="map_pic.jpg" alt="html-screenshot"/>
+<img src="screenshots/map_pic.jpg" alt="html-screenshot"/>
 
 Layer controler:
 
 
 
 
-<img src="layer_control.png" alt="layers_screenshot"/>
+<img src="screenshots/layer_control.png" alt="layers_screenshot"/>
 
 And by clicking on the marker icon, user can learn what movie where filmed in certain location.
-<img src="marker.png" alt="markers_screenshot"/>
+<img src="screenshots/mmarker.png" alt="markers_screenshot"/>
 
 ## License
 [MIT](https://github.com/alinamuliak/map_project/blob/main/LICENSE)
