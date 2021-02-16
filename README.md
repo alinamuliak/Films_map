@@ -17,8 +17,8 @@ The last two layers can be removed from the display by checking the box in the u
 With this map, the user has the opportunity to learn about interesting places that may have seen in the movies. And given that the map generates the next 10 tags, the probability that the user will be able to visit these places and see for themselves increases.
 
 ## example of startup (year and location) of input and screenshot of generated map;
-![text](start_program.jpg)
-![text](map_pic.jpg)
+![Screenshot](map_pic.jpg)
+<!-- ![text](map_pic.jpg) -->
 ## description of the structure of the html file and the markup tags that were generated.
 
 
