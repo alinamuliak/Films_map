@@ -17,11 +17,19 @@ The last two layers can be removed from the display by checking the box in the u
 With this map, the user has the opportunity to learn about interesting places that may have seen in the movies. And given that the map generates the next 10 tags, the probability that the user will be able to visit these places and see for themselves increases.
 
 ## example of startup (year and location) of input and screenshot of generated map;
-<img src="start_program.jpg" alt="My cool logo"/>
-<img src="map_pic.jpg" alt="My cool logo"/>
+This is an example of working proccess and result of programm with 2018 year and (40.730610, -73.935242) user location:
+<img src="start_program.jpg" alt="output_screenshot"/>
 
-## description of the structure of the html file and the markup tags that were generated.
+This is a map from generated html-file opened in browser:
+
+Markers that are close to each others are grouped into the clusters. Also, you can see the lines connected to New York (user input location).
+<img src="map_pic.jpg" alt="html-screenshot"/>
+
+Layer controler:
+<img src="layer_control.png" alt="layers_screenshot"/>
+
+And by clicking on the marker icon, user can learn what movie where filmed in certain location.
 
 
 ## License
-[MIT] (https://github.com/alinamuliak/map_project/blob/main/LICENSE)
+[MIT](https://github.com/alinamuliak/map_project/blob/main/LICENSE)
