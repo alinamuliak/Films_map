@@ -12,11 +12,11 @@ The map contains three layers:
 The last two layers can be removed from the display by checking the box in the upper right corner next to the layer name.
 
 
-## a brief conclusion about the information provided to us by such a card;
+## a brief conclusion about the information provided to us by this map:
 
 With this map, the user has the opportunity to learn about interesting places that may have seen in the movies. And given that the map generates the next 10 tags, the probability that the user will be able to visit these places and see for themselves increases.
 
-## example of startup (year and location) of input and screenshot of generated map;
+## example of startup (year and location) of input and screenshot of generated map:
 This is an example of working proccess and result of programm with 2018 year and (40.730610, -73.935242) user location:
 <img src="start_program.jpg" alt="output_screenshot"/>
 
