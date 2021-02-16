@@ -1,6 +1,12 @@
+"""
+This module contains functions to read data from file,
+find locations of film scene, determine ten closest locations
+and build map, based on those analysis.
+"""
+
+
 import folium
 from folium.plugins import MarkerCluster
-from copy import deepcopy
 from haversine import haversine
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderUnavailable
@@ -9,7 +15,9 @@ geolocator = Nominatim(user_agent="map_builder")
 
 def read_file(file_path: str) -> list:
     """
-    Read data from file and return the list.
+    Read data from file and return the list of lists, where
+    the firts element of smaller lists is name, year and (if is) a series of film,
+    and the second contains the address where it was filmed.
     """
 
     with open(file_path, 'r', errors='ignore') as film_list:
@@ -25,15 +33,16 @@ def read_file(file_path: str) -> list:
     return films
 
 
-# film_list = read_file("small.list")
-# print("file readed", flush=True)
-
-
 def one_year_films(year: int, film_list: list) -> list:
     """
-    повертати фільми заданого року
+    Return the list of lists that contains name of films
+    and its location made in guven year.
+    >>> one_year_films(2015, [['"Wow" (2011)', 'USA'],\
+                              ['"Princess" (2015)', "Berlin, Germany"],\
+                              ['"Hithere" (2015)', "Paris, France"]])
+    [['"Princess"', 'Berlin, Germany'], ['"Hithere"', 'Paris, France']]
     """
-    one_year_films = []
+    same_year_films = []
 
     for film_info in film_list:
         year_here = int(film_info[0].index('(')) + 1
@@ -41,18 +50,23 @@ def one_year_films(year: int, film_list: list) -> list:
             continue
         film_year = int(film_info[0][year_here:year_here + 4])
         if film_year == year:
-            one_year_films.append(
+            same_year_films.append(
                 [film_info[0][:year_here - 2], film_info[-1]])
-    return one_year_films
-
-
-# one_year = one_year_films(2000, film_list)
-# print("year chosen", len(one_year), flush=True)
+    return same_year_films
 
 
 def address_to_coordinates(film_list: list) -> list:
     """
-    всі адреси у списку замінити на координати цього місця
+    Return a list of lists where all locations are replaced by the coordinates
+    in format (lat, lon).
+    If geopy cannot find such a location, this film will not be included in returned list.
+
+    >>> address_to_coordinates([['"Wow" (2015)', 'USA'],\
+                              ['"Princess" (2015)', "Berlin, Germany"],\
+                              ['"Hithere" (2015)', "Paris, France"]])
+    [['"Wow" (2015)', (39.7837304, -100.4458825)], \
+['"Princess" (2015)', (52.5170365, 13.3888599)], \
+['"Hithere" (2015)', (48.8566969, 2.3514616)]]
     """
     global geolocator
     coord_list = []
@@ -61,8 +75,6 @@ def address_to_coordinates(film_list: list) -> list:
             location = geolocator.geocode(film_info[-1])
             coord_list.append([
                 film_info[0], (location.latitude, location.longitude)])
-            print("ok", len(coord_list),
-                  (location.latitude, location.longitude), flush=True)
         except GeocoderUnavailable:
             continue
         except AttributeError:
@@ -72,7 +84,8 @@ def address_to_coordinates(film_list: list) -> list:
 
 def determine_ten_closest(film_list: list, user_location: tuple) -> list:
     """
-    визначає відстань від юзера до усіх місць а тоді сортує
+    Return a list of lists with the information
+    of ten tags of the nearest filming locations.
     """
     closest_locations = []
     for film_info in film_list:
@@ -91,10 +104,11 @@ def determine_ten_closest(film_list: list, user_location: tuple) -> list:
     return closest_locations[:10]
 
 
-def map_builder(film_list: list, user_location: tuple, user_year):
+def map_builder(film_list: list, user_location: tuple, user_year: int) -> None:
     """
+    Built a map with 3 layers and saves it to the '(user_year)_film_map.html' file.
     """
-    map = folium.Map(location=list(user_location))
+    mapa = folium.Map(location=list(user_location))
     lat = [x[-1][0] for x in film_list]
     lon = [x[-1][1] for x in film_list]
     names = [x[0] for x in film_list]
@@ -109,10 +123,7 @@ def map_builder(film_list: list, user_location: tuple, user_year):
         folium.PolyLine(
             locations=[list(user_location), [lt, ln]], weight=2).add_to(lines_loc)
 
-    map.add_child(flm)
-    map.add_child(lines_loc)
-    folium.LayerControl().add_to(map)
-    map.save(f'{user_year}_film_map.html')
-
-
-# map_builder(closest_films, (40.730610, -73.935242))
+    mapa.add_child(flm)
+    mapa.add_child(lines_loc)
+    folium.LayerControl().add_to(mapa)
+    mapa.save(f'{user_year}_film_map.html')
