@@ -18,7 +18,7 @@ With this map, the user has the opportunity to learn about interesting places th
 
 ## example of startup (year and location) of input and screenshot of generated map:
 This is an example of working proccess and result of programm with 2018 year and (40.730610, -73.935242) user location:
-<img src="screenshots/mstart_program.jpg" alt="output_screenshot"/>
+<img src="screenshots/start_program.jpg" alt="output_screenshot"/>
 
 This is a map from generated html-file opened in browser:
 
