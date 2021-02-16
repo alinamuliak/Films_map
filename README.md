@@ -26,10 +26,14 @@ Markers that are close to each others are grouped into the clusters. Also, you c
 <img src="map_pic.jpg" alt="html-screenshot"/>
 
 Layer controler:
+
+
+
+
 <img src="layer_control.png" alt="layers_screenshot"/>
 
 And by clicking on the marker icon, user can learn what movie where filmed in certain location.
-
+<img src="marker.png" alt="markers_screenshot"/>
 
 ## License
 [MIT](https://github.com/alinamuliak/map_project/blob/main/LICENSE)
